@@ -41,9 +41,9 @@ define view entity ZI_FLCONNECTION
       @UI.lineItem: [{ position: 50, label: 'DepartureTime'}]
       @UI.identification: [{ position: 50 }]
       departure_time  as DepartureTime,
-      @UI.lineItem: [{ position: 60, label: 'ArrivalTime' }]
-      @UI.identification: [{ position: 60 }]
-      arrival_time    as ArrivalTime,
+//      @UI.lineItem: [{ position: 60, label: 'ArrivalTime' }]
+//      @UI.identification: [{ position: 60 }]
+//      arrival_time    as ArrivalTime,
       @Semantics.quantity.unitOfMeasure: 'DistanceUnit'
       @UI.identification: [{ position: 70 }]
       distance        as Distance,
