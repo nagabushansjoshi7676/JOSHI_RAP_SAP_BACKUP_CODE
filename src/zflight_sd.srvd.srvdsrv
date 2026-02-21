@@ -1,0 +1,5 @@
+@EndUserText.label: 'Flight data'
+define service Zflight_SD {
+  expose ZI_FLCONNECTION;
+  expose ZI_FLIGHTINFO_R;
+}
