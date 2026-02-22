@@ -6,7 +6,9 @@
 "/DMO/FLIGHT"
 ],
 "ASSOCIATED":
-[],
+[
+"ZI_FLCARRIER_R"
+],
 "BASE":
 [],
 "ANNO_REF":

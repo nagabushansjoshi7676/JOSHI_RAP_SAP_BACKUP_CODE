@@ -3,13 +3,10 @@
 {
 "FROM":
 [
-"/DMO/CONNECTION"
+"/DMO/CARRIER"
 ],
 "ASSOCIATED":
-[
-"ZI_FLCARRIER_R",
-"ZI_FLIGHTINFO_R"
-],
+[],
 "BASE":
 [],
 "ANNO_REF":

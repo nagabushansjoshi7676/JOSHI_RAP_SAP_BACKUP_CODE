@@ -2,4 +2,5 @@
 define service Zflight_SD {
   expose ZI_FLCONNECTION;
   expose ZI_FLIGHTINFO_R;
+  expose ZI_FLCARRIER_R;
 }
