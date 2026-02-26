@@ -42,11 +42,21 @@ define view entity ZI_FLCONNECTION
       @UI.lineItem: [{ position: 30 }]
       @UI.identification: [{ position: 30 }]
       @Search.defaultSearchElement: true
+      @Consumption.valueHelpDefinition: [ {  //providing values for search help//
+       entity : { name:  'ZI_FIAIRPORT_VH' ,
+                  element: 'AirportId' }
+       }]
+      @EndUserText.label: 'Departure_AirportId' // it Abap Annotation , used to give lable for multiple fields at a time//
       airport_from_id as AirportFromId,
       @UI.selectionField: [{ position: 20  }]
       @UI.lineItem: [{ position: 40 }]
       @UI.identification: [{ position: 40 }]
       @Search.defaultSearchElement: true
+      @Consumption.valueHelpDefinition: [ {  //providing values for search help//
+       entity : { name:  'ZI_FIAIRPORT_VH' ,
+                  element: 'AirportId' }
+       }]
+      @EndUserText.label: 'Destiniation_AirportId'
       airport_to_id   as AirportToId,
       @UI.lineItem: [{ position: 50, label: 'DepartureTime'}]
       @UI.identification: [{ position: 50 }]

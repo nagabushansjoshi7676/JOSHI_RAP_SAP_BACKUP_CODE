@@ -7,7 +7,7 @@ define view entity ZI_FLIGHTINFO_R
   as select from /dmo/flight
   association [1] to ZI_FLCARRIER_R as _Airline on $projection.CarrierId = _Airline.CarrierId
 {
-      @UI.lineItem: [{ position: 10 }]
+      @UI.lineItem: [{ position: 10 }] 
       @ObjectModel.text.association: '_Airline'
       @Search.defaultSearchElement: true
   key carrier_id     as CarrierId,
