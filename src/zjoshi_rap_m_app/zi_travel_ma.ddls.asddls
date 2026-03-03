@@ -1,9 +1,11 @@
-@AbapCatalog.viewEnhancementCategory: [#NONE]
+ @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Travel'
 @Metadata.ignorePropagatedAnnotations: true
-define view entity ZI_TRAVEL_MA
+define root  view entity ZI_TRAVEL_MA
   as select from zjtravel_m
+  // we estblish relationship b/w root and child //
+  composition[0..*] of ZI_BOOKING_MA as _Booking
   association [0..1] to /DMO/I_Agency                 as _Agency   on $projection.AgencyId = _Agency.AgencyID
   association [0..1] to /DMO/I_Customer               as _Customer on $projection.CustomerId = _Customer.CustomerID
   association [1..1] to I_Currency                    as _Currency on $projection.CurrencyCode = _Currency.Currency
@@ -28,6 +30,8 @@ define view entity ZI_TRAVEL_MA
       _Agency,
       _Customer,
       _Currency,
-      _Status
+      _Status,
+      _Booking 
 
 }
+ 

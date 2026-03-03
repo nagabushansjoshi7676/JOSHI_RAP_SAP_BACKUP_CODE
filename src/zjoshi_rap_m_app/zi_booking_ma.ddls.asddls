@@ -4,6 +4,9 @@
 @Metadata.ignorePropagatedAnnotations: true
 define view entity ZI_BOOKING_MA
   as select from zjbooking_m
+  composition[0..*] of ZI_BOOKINGSUPPL_MA as _Suppl
+  //making this one as parent //
+  association to parent ZI_TRAVEL_MA as _Travel on  $projection.TravelId = _Travel.TravelId
   //association with some master cds view //
   association [1..1] to /DMO/I_Carrier           as _Carrier        on  $projection.CarrierId = _Carrier.AirlineID
   association [1..1] to /DMO/I_Customer          as _Customer       on  $projection.CustomerId = _Customer.CustomerID
@@ -27,5 +30,7 @@ define view entity ZI_BOOKING_MA
       _Carrier,
       _Connection,
       _Customer,
-      _Booking_Status
+      _Booking_Status,
+      _Travel,
+      _Suppl
 }
