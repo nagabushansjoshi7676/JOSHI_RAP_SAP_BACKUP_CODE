@@ -17,8 +17,16 @@ annotate view ZC_TRAVEL_MA with
       position: 10,
       label: 'TRAVEL',
       type: #IDENTIFICATION_REFERENCE
-   }]
+   },
 
+   {
+      id:  'Booking',
+      purpose: #STANDARD,
+      position: 20,
+      label: 'Booking',
+      type: #LINEITEM_REFERENCE,
+      targetElement: '_Booking'
+   }]
 
   @UI.lineItem: [{ position: 10 }] //TO DISPLAY THE DATA screen //
   @Search.defaultSearchElement: true // true menas serch cond is applied for this field//
@@ -60,7 +68,8 @@ annotate view ZC_TRAVEL_MA with
   @UI.identification: [{ position: 65 }]
   Description;
   @UI: { lineItem: [{ position: 70 }],
-          selectionField: [{ position: 40  }]  }
+          selectionField: [{ position: 40  }] ,
+          textArrangement: #TEXT_ONLY }  // if you want display text first, last , middle etc //
   @Search.defaultSearchElement: true
   @Consumption.valueHelpDefinition: [{
   entity : { name: '/DMO/I_Overall_Status_VH',
