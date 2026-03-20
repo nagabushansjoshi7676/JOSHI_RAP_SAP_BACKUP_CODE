@@ -43,7 +43,7 @@ annotate view ZC_BOOKING_MA with
   @UI.identification: [{ position: 30 }]
   @Consumption.valueHelpDefinition: [{
   entity : { name: '/DMO/I_Customer',
-            element: 'CustomerId' } }]
+            element: 'CustomerID' } }]
   CustomerId;
   @UI.lineItem: [{ position: 40 }]
   @UI.identification: [{ position: 40 }]
@@ -56,10 +56,10 @@ annotate view ZC_BOOKING_MA with
   @UI.identification: [{ position: 50 }]
   @Consumption.valueHelpDefinition: [{
   entity : { name: '/DMO/I_Flight',
-           element: 'ConnectionId' } ,
+           element: 'ConnectionID' } ,
   //Additional Binding for get connid based on airlineid, flightprice, currencycode//
-  additionalBinding: [{  element: 'ConnectionId',
-                       localElement: 'ConnectionId'},
+  additionalBinding: [{  element: 'ConnectionID',
+                       localElement: 'ConnectionID'},
                       {  element: 'AirlineID',
                        localElement: 'CarrierId'},
                       {  element: 'CurrencyCode',

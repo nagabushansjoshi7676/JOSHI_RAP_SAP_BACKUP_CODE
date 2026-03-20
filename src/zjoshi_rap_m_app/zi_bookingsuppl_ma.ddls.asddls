@@ -19,6 +19,8 @@ define view entity ZI_BOOKINGSUPPL_MA
       @Semantics.amount.currencyCode: 'CurrencyCode'
       price                 as Price,
       currency_code         as CurrencyCode,
+      //special role as E-tag//
+      @Semantics.systemDateTime.localInstanceLastChangedAt: true 
       last_changed_at       as LastChangedAt,
       _Supplement,
       _Supplementtext,

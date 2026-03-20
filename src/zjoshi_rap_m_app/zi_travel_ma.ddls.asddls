@@ -1,7 +1,7 @@
 @AbapCatalog.viewEnhancementCategory: [#NONE]
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Travel'
-@Metadata.ignorePropagatedAnnotations: true
+//@Metadata.ignorePropagatedAnnotations: true
 define root view entity ZI_TRAVEL_MA
   as select from zjtravel_m
   // we estblish relationship b/w root and child //
@@ -26,6 +26,8 @@ define root view entity ZI_TRAVEL_MA
       created_by         as CreatedBy,
       created_at         as CreatedAt,
       last_changed_by    as LastChangedBy,
+      //special role as E-tag//
+      @Semantics.systemDateTime.localInstanceLastChangedAt: true 
       last_changed_at    as LastChangedAt,
       _Agency,
       _Customer,

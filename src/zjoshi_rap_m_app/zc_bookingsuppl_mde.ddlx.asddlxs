@@ -12,7 +12,7 @@ typeName: 'BOOKINGSUPPLMENT',
 annotate view ZC_BOOKINGSUPPL_MA with
 {
   @UI.facet: [{
-          id:  'BOOKINGSUPPL',
+          id:  'BOOKINGSUPPL',  
           purpose: #STANDARD,
           position: 10,
           label: 'BOOKING SUPPLEMENT',
@@ -20,7 +20,7 @@ annotate view ZC_BOOKINGSUPPL_MA with
        }]
   @Search.defaultSearchElement: true
   TravelId;
-  @Search.defaultSearchElement: true
+  @Search.defaultSearchElement: true 
   BookingId;
   @UI.lineItem: [{ position: 10 }]
   @UI.identification: [{ position: 10 }]
@@ -29,9 +29,9 @@ annotate view ZC_BOOKINGSUPPL_MA with
   @UI.identification: [{ position: 20 }]
   @Consumption.valueHelpDefinition: [{
   entity : { name: '/DMO/I_Supplement',
-           element: 'SupplementId'},
-  additionalBinding: [{  element: 'SupplementId',
-                       localElement: 'SupplementId'},
+           element: 'SupplementID'},
+  additionalBinding: [{  element: 'SupplementID',
+                       localElement: 'SupplementID'},
                       {  element: 'Price',
                        localElement: 'Price'},
                       {  element: 'CurrencyCode',
