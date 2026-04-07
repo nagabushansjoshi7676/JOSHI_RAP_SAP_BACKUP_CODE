@@ -7,12 +7,18 @@ persistent table zjtravel_m
 lock master  //pessimestis//
 authorization master ( instance )
 etag master LastChangedAt //optimestic// // only parent or rrot entities name should be mentioned//
+early numbering
 {
+  field ( readonly ) TravelId;
+  action  acceptTravel result [1] $self;
+  action  rejectTravel result [1] $self;
+
+  factory action copyTravel [1];
+
+  internal action recalcTotPrice;
   create ( authorization : global );
   update;
   delete;
-  //  field ( readonly ) TravelId;
-  field ( mandatory : create ) TravelId;
   association _Booking { create; }
   mapping for zjtravel_m
     {
@@ -40,11 +46,11 @@ lock dependent by _Travel
 authorization dependent by _Travel
 //etag dependent by _Travel  //this e tage alwyas belongs to child entity , if you ues you should comment e-tag field in table and cds//
 etag master LastChangedAt
+early numbering
 {
+  field ( readonly ) TravelId, BookingId;
   update;
   delete;
-  //  field ( readonly ) TravelId, BookingId;
-  field ( readonly : update ) TravelId, BookingId;
   association _Travel;
   association _Suppl { create; }
   mapping for zjbooking_m
@@ -69,10 +75,11 @@ persistent table zjbooking_supp_m
 lock dependent by _Travel
 authorization dependent by _Travel
 etag master LastChangedAt
+early numbering
 {
+  field ( readonly ) TravelId, BookingId, BookingSupplementId;
   update;
   delete;
-  field ( readonly : update ) TravelId, BookingId, BookingSupplementId;
   association _Travel;
   association _Booking;
   mapping for zjbooking_supp_m
