@@ -139,6 +139,67 @@ CLASS lhc_ZI_TRAVEL_MA IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD copyTravel.
+
+    DATA : lt_travel   TYPE TABLE FOR CREATE zi_travel_ma,
+           lt_booking  TYPE TABLE FOR CREATE zi_travel_ma\_Booking,
+           lt_booksupp TYPE TABLE FOR CREATE zi_booking_ma\_Suppl.
+
+    "fisrt we need to check cid is intial or not" it shoud not be filled "
+    READ TABLE keys ASSIGNING FIELD-SYMBOL(<ls_without_cid>) WITH KEY %cid = ' '.
+    ASSERT <ls_without_cid> IS INITIAL.
+
+    "now we are reading three mapped tables"
+    READ ENTITIES OF zi_travel_ma IN LOCAL MODE
+    ENTITY zi_travel_ma
+    ALL FIELDS WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_travle_r)
+    FAILED DATA(lt_travel_f).
+
+    READ ENTITIES OF zi_travel_ma IN LOCAL MODE
+   ENTITY zi_travel_ma BY \_Booking
+   ALL FIELDS WITH CORRESPONDING #( lt_travle_r )
+   RESULT DATA(lt_booking_r).
+
+    READ ENTITIES OF zi_travel_ma IN LOCAL MODE
+       ENTITY zi_booking_ma BY \_Suppl
+       ALL FIELDS WITH CORRESPONDING #( lt_booking_r )
+       RESULT DATA(lt_bookingsupp_r).
+
+    "looping internal and assign to another table "
+    LOOP AT lt_travle_r ASSIGNING FIELD-SYMBOL(<ls_travel_r>).
+
+      "appending travel data"
+      APPEND VALUE #( %cid = keys[ KEY entity TravelId = <ls_travel_r>-TravelId ]-%cid
+                      %data = CORRESPONDING #( <ls_travel_r> EXCEPT Travelid ) )
+                      TO lt_travel ASSIGNING FIELD-SYMBOL(<ls_travel>).
+
+      "after copy , some fields want to be chnaged " "getting system varibles by method"
+      <ls_travel>-BeginDate = cl_abap_context_info=>get_system_date(  ).
+      <ls_travel>-EndDate = cl_abap_context_info=>get_system_date(  ) + 30.
+      <ls_travel>-OverallStatus = 'O'.
+
+      APPEND VALUE #( %cid_ref = <ls_travel>-%cid )
+      TO lt_booking ASSIGNING FIELD-SYMBOL(<lt_booking>)
+.
+      LOOP AT lt_booking_r ASSIGNING FIELD-SYMBOL(<ls_booking_r>)
+                                  USING KEY entity
+                                  WHERE TravelId = <ls_travel_r>-TravelId.
+        "appending booking data (travel cid and trget)
+
+        APPEND VALUE #( %cid = <ls_travel>-%cid && <ls_booking_r>-BookingId  "concatnate"
+                        %data = CORRESPONDING #( <ls_booking_r> EXCEPT Travelid ) )
+                        TO <lt_booking>-%target asSIGNING fIELD-SYMBOL(<ls_booking_n>).
+
+          "modifiny the booking status as new"
+
+
+
+      ENDLOOP.
+
+
+    ENDLOOP.
+
+
   ENDMETHOD.
 
   METHOD recalcTotPrice.
