@@ -4,6 +4,24 @@ CLASS lhc_zi_booking_ma DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS earlynumbering_cba_Suppl FOR NUMBERING
       IMPORTING entities FOR CREATE zi_booking_ma\_Suppl.
+    METHODS get_instance_features FOR INSTANCE FEATURES
+      IMPORTING keys REQUEST requested_features FOR zi_booking_ma RESULT result.
+    METHODS validateconnection FOR VALIDATE ON SAVE
+      IMPORTING keys FOR zi_booking_ma~validateconnection.
+
+    METHODS validatecurrencycode FOR VALIDATE ON SAVE
+      IMPORTING keys FOR zi_booking_ma~validatecurrencycode.
+
+    METHODS validatecustomer FOR VALIDATE ON SAVE
+      IMPORTING keys FOR zi_booking_ma~validatecustomer.
+
+    METHODS validateflightprice FOR VALIDATE ON SAVE
+      IMPORTING keys FOR zi_booking_ma~validateflightprice.
+
+    METHODS validatestatus FOR VALIDATE ON SAVE
+      IMPORTING keys FOR zi_booking_ma~validatestatus.
+    METHODS calculatetotalprice FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR zi_booking_ma~calculatetotalprice.
 
 ENDCLASS.
 
@@ -58,6 +76,52 @@ CLASS lhc_zi_booking_ma IMPLEMENTATION.
       ENDLOOP.
 
     ENDLOOP.
+  ENDMETHOD.
+
+  METHOD get_instance_features.
+
+    "reading "
+    READ ENTITIES OF zi_travel_ma IN LOCAL MODE
+    ENTITY zi_travel_ma BY \_Booking
+    FIELDS ( TravelId BookingStatus )
+    WITH CORRESPONDING #( keys )
+    RESULT  DATA(lt_booking).
+
+    "looping and enabling and disabling feature control
+
+    result = VALUE #( FOR ls_booking IN lt_booking
+                    (  %tky = ls_booking-%tky
+                         %features-%assoc-_Suppl  = COND #( WHEN ls_booking-BookingStatus = 'X'
+                                                                THEN if_abap_behv=>fc-o-disabled
+                                                                ELSE if_abap_behv=>fc-o-enabled )   ) ).
+
+  ENDMETHOD.
+
+  METHOD validateConnection.
+  ENDMETHOD.
+
+  METHOD validateCurrencyCode.
+  ENDMETHOD.
+
+  METHOD validateCustomer.
+  ENDMETHOD.
+
+  METHOD validateFlightPrice.
+  ENDMETHOD.
+
+  METHOD validateStatus.
+  ENDMETHOD.
+
+  METHOD calculateTotalPrice.
+
+    DATA: it_travel TYPE STANDARD TABLE OF zi_travel_ma WITH UNIQUE HASHED KEY key COMPONENTS TravelId.
+
+    it_travel =  CORRESPONDING #(  keys DISCARDING DUPLICATES MAPPING TravelId = TravelId ).
+    MODIFY ENTITIES OF zi_travel_ma IN LOCAL MODE
+     ENTITY zi_travel_ma
+     EXECUTE recalctotprice
+     FROM CORRESPONDING #( it_travel ).
+
   ENDMETHOD.
 
 ENDCLASS.

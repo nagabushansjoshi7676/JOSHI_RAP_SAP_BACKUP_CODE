@@ -12,7 +12,7 @@ typeName: 'TRAVEL',
 annotate view ZC_TRAVEL_MA with
 {
   @UI.facet: [{
-      id:  'TRAVEL',
+      id:  'Travel',
       purpose: #STANDARD,
       position: 10,
       label: 'TRAVEL',
@@ -28,7 +28,9 @@ annotate view ZC_TRAVEL_MA with
       targetElement: '_Booking'
    }]
 
-  @UI.lineItem: [{ position: 10 }] //TO DISPLAY THE DATA screen //
+  @UI.lineItem: [{ position: 10 },  //TO DISPLAY THE DATA screen //
+                 { type : #FOR_ACTION, dataAction: 'copyTravel', label: 'Copy Travel ' }
+  ]
   @Search.defaultSearchElement: true // true menas serch cond is applied for this field//
   @UI.identification: [{ position: 10 }]
   TravelId;

@@ -12,7 +12,7 @@ typeName: 'BOOKING',
 annotate view ZC_BOOKING_MA with
 {
   @UI.facet: [{
-        id:  'BOOKING',
+        id:  'Booking',
         purpose: #STANDARD,
         position: 10,
         label: 'BOOKING',
