@@ -1,0 +1,64 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+typeName: 'Address',
+typeNamePlural: 'Addresses',
+title:{
+        type: #STANDARD,
+        value: 'City'
+       },
+  description :{
+        type: #STANDARD,
+        value: 'AddressId'
+  }
+  }
+annotate entity ZC_CONt_ADDRESS with
+{
+  @UI.facet: [
+  {
+  id: 'idAddress',
+  purpose: #STANDARD,
+  position: 10,
+  type: #IDENTIFICATION_REFERENCE,
+  label: 'Address details'
+  }]
+
+  @UI.hidden: true
+  ContactId;
+
+  @UI.hidden: true
+  AddressId;
+
+  @UI.hidden: true
+  //  @UI.lineItem: [{ position: 30 ,label:'Sr. No'   }]
+  @UI.identification: [{ position: 30 ,label:'Sr. No' }]
+  AddressSr;
+
+  @UI.lineItem: [{ position: 40 ,label:'Addr 1'   }]
+  @UI.identification: [{ position: 40 ,label:'Addr 1' }]
+  Addr1;
+
+  //  @UI.lineItem: [{ position: 50 ,label:'Addr 2'   }]
+  @UI.identification: [{ position: 50 ,label:'Addr 2' }]
+  Addr2;
+
+  @UI.lineItem: [{ position: 60 ,label:'City'   }]
+  @UI.identification: [{ position: 60 ,label:'City' }]
+  City;
+
+  @UI.lineItem: [{ position: 70 ,label:'State'   }]
+  @UI.identification: [{ position: 70 ,label:'State' }]
+  State;
+
+  //  @UI.lineItem: [{ position: 80 ,label:'Pincode'   }]
+  @UI.identification: [{ position: 80 ,label:'Pincode' }]
+  Pincode;
+
+  @UI.hidden: true
+  CreatedBy;
+
+  @UI.hidden: true
+  CreatedAt;
+
+
+}

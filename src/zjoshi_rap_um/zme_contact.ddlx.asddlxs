@@ -1,0 +1,114 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+typeName: 'Contact',
+typeNamePlural: 'Contacts',
+title:{
+        type: #STANDARD,
+        label: 'First name',
+        value: 'FirstName'
+       },
+  description :{
+        type: #STANDARD,
+        label: 'Last name',
+        value: 'LastName'
+  }
+  }
+@Search.searchable: true
+annotate entity ZC_CONTACT with
+{
+  @UI.facet: [
+   {
+   id: 'idContact',
+   purpose: #STANDARD,
+   position: 10,
+   type: #IDENTIFICATION_REFERENCE,
+   label: 'Contact details'
+   },
+
+   {
+   id: 'idAddress',
+   purpose: #STANDARD,
+   position: 20,
+   type: #LINEITEM_REFERENCE,
+   label: 'Address details',
+   targetElement: '_Address'
+   }
+  ]
+
+  @UI.identification: [{ position: 10, label: 'Contact id' }]
+  @UI.hidden: true
+  ContactId;
+
+  @UI.lineItem: [{ position: 20 ,label: 'First Name' } ]
+  @UI.identification: [{ position: 20 ,label: 'First Name' } ]
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  @UI.fieldGroup: [{ position: 10 , qualifier: 'Details' , label: 'First Name' }]
+  FirstName;
+
+  @UI.lineItem: [{ position: 30 ,label:'Middle Name'   }]
+  @UI.identification: [{ position: 30 ,label:'Middle Name' }]
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  MiddleName;
+
+  @UI.lineItem: [{ position: 40 ,label: 'LastName' }]
+  @UI.identification: [{ position: 40 ,label: 'LastName'  }]
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  @UI.fieldGroup: [{ position: 20 , qualifier: 'Details' , label: 'LastName' }]
+  LastName;
+
+  @UI.lineItem: [{ position: 50 ,label: 'Gender' }]
+  @UI.identification: [{ position: 50 ,label: 'Gender' }]
+  @Consumption.valueHelpDefinition: [{
+      entity: {
+          name : 'ZI_GENDER_U',
+          element: 'GenderCode'
+         }
+
+   }]
+  @UI.textArrangement: #TEXT_FIRST
+  Gender;
+
+  @UI.identification: [{ position: 60 ,label: 'DOB'   }]
+  Dob;
+
+  @UI.lineItem: [{ position: 70 ,label: 'Age' }]
+  @UI.identification: [{ position: 70 ,label: 'Age'  }]
+  Age;
+
+  @UI.lineItem: [{ position: 80 ,label: 'Telephone'  }]
+  @UI.identification: [{ position: 80 ,label: 'Telephone'  }]
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  @UI.fieldGroup: [{ position: 30 , qualifier: 'Details' , label: 'Telephone' }]
+  Telephone;
+
+  @UI.identification: [{ position: 90 ,label: 'Email'  }]
+  @UI.fieldGroup: [{ position: 40 , qualifier: 'Details' , label: 'Email' }]
+  Email;
+
+  @UI.lineItem: [{ position:  100,label: 'Active' },
+  { type : #FOR_ACTION, label : 'Change Status', dataAction: 'setstatus' },
+
+  { type : #FOR_ACTION, label : 'Change field value', dataAction: 'change_field_value' }
+  ]
+  @UI.identification: [{ position: 100 ,label: 'Active'  }]
+  Active;
+
+  @UI.hidden: true
+  CreatedBy;
+
+  @UI.hidden: true
+  CreatedAt;
+
+  @UI.hidden: true
+  LastChangedBy;
+
+  @UI.hidden: true
+  LastChangedAt;
+
+
+}
