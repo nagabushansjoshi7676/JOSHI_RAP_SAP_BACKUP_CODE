@@ -1,0 +1,49 @@
+unmanaged implementation in class zbp_i_contact_saver_u unique;
+strict ( 2 );
+
+define behavior for ZI_CONTACT_U //alias <alias_name>
+implementation in class zcl_bp_contact_u unique
+late numbering
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly ) ContactId;
+  //  association _Address { create; }
+
+  mapping for zjo_contact control zjo_s_contact
+    {
+      ContactId     = contact_id;
+      FirstName     = first_name;
+      MiddleName    = middle_name;
+      LastName      = last_name;
+      Gender        = gender;
+      Dob           = dob;
+      Age           = age;
+      Telephone     = telephone;
+      Email         = email;
+      Active        = active;
+      CreatedBy     = created_by;
+      CreatedAt     = created_at;
+      LastChangedBy = last_changed_by;
+      LastChangedAt = last_changed_at;
+    }
+
+}
+
+
+
+//define behavior for ZI_Address_U //alias <alias_name>
+////late numbering
+//lock dependent by _Contact
+//authorization dependent by _Contact
+////etag master <field_name>
+//{
+//  update;
+//  delete;
+//  field ( readonly ) ContactId, AddressId, AddressSr;
+//  association _Contact;
+//}

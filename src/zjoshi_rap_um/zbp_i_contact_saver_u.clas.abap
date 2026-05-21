@@ -1,0 +1,5 @@
+CLASS zbp_i_contact_saver_u DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_contact_u.
+ENDCLASS.
+
+CLASS zbp_i_contact_saver_u IMPLEMENTATION.
+ENDCLASS.

@@ -1,0 +1,4 @@
+@EndUserText.label: 'SD Contact'
+define service ZSD_UNM {
+  expose ZC_CONTACT;
+}

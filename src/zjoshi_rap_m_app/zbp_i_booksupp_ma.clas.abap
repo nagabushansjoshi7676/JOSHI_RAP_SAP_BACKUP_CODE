@@ -1,5 +1,13 @@
-CLASS zbp_i_booksupp_ma DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_travel_ma.
+class ZBP_I_BOOKSUPP_MA definition
+  public
+  create private .
+
+public section.
+protected section.
+private section.
 ENDCLASS.
 
-CLASS zbp_i_booksupp_ma IMPLEMENTATION.
+
+
+CLASS ZBP_I_BOOKSUPP_MA IMPLEMENTATION.
 ENDCLASS.
