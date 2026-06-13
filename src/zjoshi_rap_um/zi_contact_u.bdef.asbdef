@@ -9,10 +9,10 @@ authorization master ( instance )
 //etag master <field_name>
 {
   create ( authorization : global );
-  update;
-  delete;
-  field ( readonly ) ContactId;
-  //  association _Address { create; }
+  update(features : instance);
+  delete(features : instance);
+  field ( readonly ) ContactId, age;
+  association _Address{create; }
 
   mapping for zjo_contact control zjo_s_contact
     {
@@ -34,7 +34,35 @@ authorization master ( instance )
 
 }
 
+define behavior for ZI_Address_U
+implementation in class zcl_bp_Address_u unique
+//draft table zbrt_t_contadd_d
+late numbering
+lock dependent by _Contact
+authorization dependent by _Contact
+{
+  update; // (features : instance);
+  delete; //(features : instance);
+  field ( readonly ) ContactId, AddressId, AddressSr;
 
+  association _Contact;
+
+  mapping for zjo_cont_address control zjo_s_address
+    {
+      ContactId     = contact_id;
+      AddressId     = address_id;
+      AddressSr     = address_sr;
+      Addr1         = addr1;
+      Addr2         = addr2;
+      City          = city;
+      State         = state;
+      Pincode       = pincode;
+      CreatedBy     = created_by;
+      CreatedAt     = created_at;
+      LastChangedBy = last_changed_by;
+      LastChangedAt = last_changed_at;
+    }
+}
 
 //define behavior for ZI_Address_U //alias <alias_name>
 ////late numbering

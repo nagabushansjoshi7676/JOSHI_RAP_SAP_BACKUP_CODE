@@ -4,7 +4,7 @@
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZI_CONTACT_U
   as select from zjo_contact
-  composition [0..*] of ZI_Address_U as _Address
+  composition [1..*] of ZI_Address_U as _Address
   association [1..*] to ZI_GENDER_U  as _Gender on $projection.Gender = _Gender.GenderCode
 {
   key contact_id      as ContactId,
